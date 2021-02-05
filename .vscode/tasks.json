@@ -8,7 +8,7 @@
       "args": [
         "-g",
         //"${fileDirname}/${input:Compiler Arg}",
-        "${fileDirname}/**.*",
+        "${fileDirname}/**.cpp",
         //"${file}",
         //"${fileDirname}/list.cpp",
         "-o",
