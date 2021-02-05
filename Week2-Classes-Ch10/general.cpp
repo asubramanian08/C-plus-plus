@@ -180,6 +180,8 @@ private:
 public:
     Plorg(const char *nm = "Plorga")
     {
+        if (nm[0] == '\0')
+            nm = "Plorga";
         strncpy(name, nm, NAME_LEN);
         ci = START_CI;
     }
@@ -200,10 +202,11 @@ void show(int &x)
 {
     cout << x << ' ';
 }
+
 int main(void)
 {
     //pro. ex. q1
-    /*cout << "Inittializing joe's broke account" << endl;
+    cout << "Inittializing joe's broke account" << endl;
     Account joe("Joe Joey"); //name dedicated to Mr. Mabrey
     int act = 0;
     while (act != 4)
@@ -235,10 +238,10 @@ int main(void)
         }
     }
     cout << "Joe's account ended" << endl
-         << endl;*/
+         << endl;
 
     //pro ex. q2
-    /*cout << "Starting Joe person activity" << endl;
+    cout << "Starting Joe person activity" << endl;
     Person joe1;
     Person joe2("Joe");
     Person joe3("Joe", "Joey");
@@ -250,10 +253,10 @@ int main(void)
     cout << " is a formal and well documented man" << endl;
     system("sleep 2");
     cout << "Joe person programming ended" << endl
-         << endl;*/
+         << endl;
 
     //pro. ex. q6
-    /*cout << "Starting move program" << endl;
+    cout << "Starting move program" << endl;
     Move one(getX(), getY());
     one.showmove();
     cout << "How many times do you want to do addition: ";
@@ -268,18 +271,15 @@ int main(void)
     }
     system("sleep 2");
     cout << "Move program endend" << endl
-         << endl;*/
+         << endl;
 
     //pro. ex. q7
-    /*cout << "Starting plorg program" << endl;
-    //cin.ignore()
+    cout << "Starting plorg program" << endl;
+    cin.ignore();
     cout << "Enter you plorg's name (the max length is " << NAME_LEN << "): ";
     char name[NAME_LEN];
     cin.getline(name, NAME_LEN);
-    //Plorg p(name[0] != '\0' ? name : void); //??
-    Plorg p(name);       //??
-    if (name[0] == '\0') //??
-        p = Plorg();     //??
+    Plorg p(name);
     p.show();
     cout << "Enter you plorg's CI: ";
     int ci;
@@ -287,10 +287,9 @@ int main(void)
     p.changeCI(ci);
     p.show();
     cout << "You finished playing with plorgs" << endl
-         << endl;*/
+         << endl;
 
     //pro. ex. q8
-    //DOESN't WORK in diffrent functions
     cout << "Starting list program" << endl;
     List<int> l;
     int comand;
