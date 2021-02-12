@@ -4,10 +4,13 @@ using namespace std;
 //ch. rev. q2
 /* Friend functions are not called from a class object */
 
-//ch. rev. q4 ??
-/*Stonewt operator*(double mult, Stonewt &stn)
+//ch. rev. q4
+//In class - friend Stonewt operator*(double mult, const Stonewt5 &s);
+//Out of class:
+/*Stonewt operator*(double mult, const Stonewt &stn)
 {
     return Stonewt(stn.stone * mult);
+    //return stn * mult;
 }*/
 
 //ch. rev. q5 (operators that can't be overloaded)
@@ -31,7 +34,7 @@ using namespace std;
 /* Will go inside the real files (header and cpp file)
 operator double() const { return mag; } */
 
-//pro. ex. q4 ?? they are already done
+//pro. ex. q4
 #include "myTime3.hpp"
 //See the changes in myTime3.hpp and myTime.cpp
 
