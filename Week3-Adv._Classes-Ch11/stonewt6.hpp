@@ -23,6 +23,6 @@ public:
     bool operator>=(const Stonewt6 &s) const;
     bool operator<=(const Stonewt6 &s) const;
 
-    //int operator<=>(const Stonewt6 &s); //could do but didn't implement
+    //int operator<=>(const Stonewt6 &s) const; //could do but didn't implement
 };
 #endif
