@@ -1,11 +1,11 @@
 //The string1.h from their code with my additions
 
 // string2.h -- fixed and augmented string class definition
-#ifndef STRING1_H_
-#define STRING1_H_
+//I fixed the using std::i/o stream
+#ifndef STRING2_H_
+#define STRING2_H_
 #include <iostream>
-using std::istream;
-using std::ostream;
+
 class String
 {
 private:
@@ -29,8 +29,8 @@ public:
     friend bool operator<(const String &st, const String &st2);
     friend bool operator>(const String &st1, const String &st2);
     friend bool operator==(const String &st, const String &st2);
-    friend ostream &operator<<(ostream &os, const String &st);
-    friend istream &operator>>(istream &is, String &st);
+    friend std::ostream &operator<<(std::ostream &os, const String &st);
+    friend std::istream &operator>>(std::istream &is, String &st);
     // static function
     static int HowMany();
 

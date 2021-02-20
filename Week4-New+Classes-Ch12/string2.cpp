@@ -90,14 +90,14 @@ bool operator==(const String &st1, const String &st2)
 }
 
 // simple String output
-ostream &operator<<(ostream &os, const String &st)
+std::ostream &operator<<(std::ostream &os, const String &st)
 {
     os << st.str;
     return os;
 }
 
 // quick and dirty String input
-istream &operator>>(istream &is, String &st)
+std::istream &operator>>(std::istream &is, String &st)
 {
     char temp[String::CINLIM];
     is.get(temp, String::CINLIM);

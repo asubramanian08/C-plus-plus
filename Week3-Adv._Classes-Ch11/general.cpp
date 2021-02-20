@@ -57,7 +57,7 @@ std::ostream &operator<<(std::ostream &os, const Stonewt6 &s)
 int main(void)
 {
     //pro. ex. q4 (their run code)
-    /*cout << "The time program stated" << endl;
+    cout << "The time program stated" << endl;
     //usetime3.cpp -- using the fourth draft of the Time class
     // compile usetime3.cpp and mytime3.cpp together
     Time aida(3, 35);
@@ -71,21 +71,21 @@ int main(void)
     cout << "Aida * 1.17: " << temp << endl;
     cout << "10.0 * Tosca: " << 10.0 * tosca << endl;
     cout << "Time program ended" << endl
-         << endl;*/
+         << endl;
 
     //pro. ex. q5
-    /*cout << "Starting the stone weight program" << endl;
-    Stonewt5 stn1(Stonewt5::ioForm::DOUB_LBS);
-    Stonewt5 stn2(5.7, Stonewt5::ioForm::INT_LBS);
+    cout << "Starting the stone weight program" << endl;
+    Stonewt5 stn1(Stonewt5::DOUB_LBS);
+    Stonewt5 stn2(5.7, Stonewt5::INT_LBS);
     Stonewt5 stn3(4, 54);
     cout << "Stone 1: " << stn1 << "Stone 2: " << stn2 << "Stone 3: " << stn3;
     cout << "Stone 1 + 2: " << stn1 + stn2;
     cout << "Stone 2 - 3: " << stn2 - stn3;
     cout << "5 * stone 3: " << 5 * stn3;
-    cout << "Stone weight program ended" << endl;*/
+    cout << "Stone weight program ended" << endl;
 
     //pro. ex. q6
-    /*cout << "Stone program with overloaded bool operators starting" << endl;
+    cout << "Stone program with overloaded bool operators starting" << endl;
     Stonewt6 arr[6];
     arr[0] = Stonewt6();
     arr[1] = Stonewt6(5, 3.2);
@@ -129,7 +129,7 @@ int main(void)
          << "The " << largest << "th element is largest with a value of " << arr[largest] << endl
          << "The " << smallest << "th element is the smallest with a value of " << arr[smallest] << endl;
     cout << "Stone program with overloaded bool operators finished" << endl
-         << endl;*/
+         << endl;
 
     //pro. ex. q7 (Their test code)
     complex a(3.0, 4.0); // initialize to (3,4i)
