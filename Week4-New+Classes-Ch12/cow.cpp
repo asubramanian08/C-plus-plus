@@ -34,7 +34,7 @@ Cow &Cow::operator=(const Cow &c)
 {
     if (this != &c)
     {
-        delete[] hobby;
+        delete[] hobby; //don't have to delete if smaller
         int ho_size = strlen(c.hobby) + 1;
         hobby = new char[ho_size];
         strncpy(hobby, c.hobby, ho_size);
@@ -46,7 +46,9 @@ Cow &Cow::operator=(const Cow &c)
 
 void Cow::ShowCow() const
 {
-    std::cout << "The cows name is: " << name << std::endl
-              << name << "\'s hobby is: " << hobby << std::endl
-              << name << " weighs " << weight << " pounds" << std::endl;
+    using std::cout;
+    using std::endl;
+    cout << "The cows name is: " << name << endl
+         << name << "\'s hobby is: " << hobby << endl
+         << name << " weighs " << weight << " pounds" << endl;
 }
