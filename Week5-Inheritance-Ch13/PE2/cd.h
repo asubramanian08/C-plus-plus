@@ -4,9 +4,12 @@
 class Cd // represents a CD disk
 {
 private:
-    const static int PERF_LEN = 50, LABEL_LEN = 20;
-    char performers[PERF_LEN];
-    char label[LABEL_LEN];
+    int perfLen, labelLen;
+#define DEF_PREF "none listed"
+#define DEF_LABEL "no label"
+    static const char def_label[];
+    char *performers;
+    char *label;
     int selections;  // number of selections
     double playtime; // playing time in minutes
 public:
