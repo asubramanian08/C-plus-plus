@@ -4,7 +4,6 @@ class Classic : public Cd
 {
 private:
     int workLen;
-#define DEF_WORK "No primary work"
     char *primWork;
 
 public:
