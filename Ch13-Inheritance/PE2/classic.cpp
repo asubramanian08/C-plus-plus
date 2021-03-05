@@ -3,6 +3,8 @@
 #include <iostream>
 using std::cout;
 
+const char defWork[] = "No primary work";
+
 Classic::Classic(const char *prfs, const char *lbl, const char *p_work, int plays, double time)
     : Cd::Cd(prfs, lbl, plays, time)
 {
@@ -18,11 +20,11 @@ Classic::Classic(const Classic &cls) : Cd::Cd(cls)
 }
 Classic::Classic() : Cd::Cd()
 {
-    workLen = strlen(DEF_WORK) + 1;
+    workLen = strlen(defWork) + 1;
     primWork = new char[workLen];
-    strncpy(primWork, DEF_WORK, workLen);
+    strncpy(primWork, defWork, workLen);
 }
-Classic::~Classic() {}
+Classic::~Classic() { delete[] primWork; }
 
 void Classic::Report() const
 {

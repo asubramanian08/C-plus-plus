@@ -3,6 +3,9 @@
 #include <iostream>
 using std::cout;
 
+const char defPref[] = "none listed";
+const char defLabel[] = "no label";
+
 Cd::Cd(const char *prfs, const char *lbl, int plays, double time)
 {
     perfLen = strlen(prfs) + 1;
@@ -31,13 +34,13 @@ Cd::Cd(const Cd &d)
 }
 Cd::Cd()
 {
-    perfLen = strlen(DEF_PREF) + 1;
+    perfLen = strlen(defPref) + 1;
     performers = new char[perfLen];
-    strncpy(performers, DEF_PREF, perfLen);
+    strncpy(performers, defPref, perfLen);
 
-    labelLen = strlen(DEF_LABEL) + 1;
+    labelLen = strlen(defLabel) + 1;
     label = new char[labelLen];
-    strncpy(label, DEF_LABEL, labelLen);
+    strncpy(label, defLabel, labelLen);
 
     selections = 0;
     playtime = 0;

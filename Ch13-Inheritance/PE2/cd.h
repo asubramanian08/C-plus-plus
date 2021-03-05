@@ -5,9 +5,6 @@ class Cd // represents a CD disk
 {
 private:
     int perfLen, labelLen;
-#define DEF_PREF "none listed"
-#define DEF_LABEL "no label"
-    static const char def_label[];
     char *performers;
     char *label;
     int selections;  // number of selections
