@@ -63,7 +63,8 @@
         "type_traits": "cpp",
         "typeinfo": "cpp",
         "unordered_map": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "memory_resource": "cpp"
     },
 	"editor.formatOnPaste": true,
 	"editor.formatOnSave": true,

@@ -7,10 +7,7 @@
             "command": "/usr/bin/g++",
             "args": [
                 "-g",
-                //"${fileDirname}/${input:Compiler Arg}",
-                "${fileDirname}/**.cpp",
-                //"${file}",
-                //"${fileDirname}/list.cpp",
+                "${fileDirname}/*.cpp",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],
