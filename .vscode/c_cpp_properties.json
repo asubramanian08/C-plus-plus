@@ -1,7 +1,7 @@
 {
     "configurations": [
         {
-            "name": "GCC",
+            "name": "g++",
             "includePath": [
                 "${workspaceFolder}"
             ],
@@ -9,7 +9,7 @@
             "macFrameworkPath": [],
             "cStandard": "c17",
             "cppStandard": "c++17",
-            "compilerPath": "/usr/bin/gcc"
+            "compilerPath": "/usr/bin/g++"
         }
     ],
     "version": 4
