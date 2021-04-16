@@ -1,5 +1,5 @@
 {
-	"files.associations": {
+    "files.associations": {
         "*.java": "java",
         "algorithm": "cpp",
         "array": "cpp",
@@ -66,7 +66,8 @@
         "vector": "cpp",
         "memory_resource": "cpp"
     },
-	"editor.formatOnPaste": true,
-	"editor.formatOnSave": true,
-	"editor.formatOnType": true
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "C_Cpp.enhancedColorization": "Enabled"
 }

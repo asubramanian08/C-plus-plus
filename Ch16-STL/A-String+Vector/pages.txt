@@ -1,0 +1,2 @@
+String: pg 952 - pg 968
+Vector: 979 - 1007 (includes iterators)
