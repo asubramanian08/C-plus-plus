@@ -1,0 +1,9 @@
+Read from https://www.cplusplus.com/reference/stl/
+
+Break down:
+ - Vectors - https://www.cplusplus.com/reference/vector/vector/
+ - Strings - http://www.cplusplus.com/reference/string/string/?kw=string
+ - Lists - https://www.cplusplus.com/reference/list/list/
+ - *** Template functions from Algorithms  (fill(), generate(), count_if(), etc...):  
+http://www.cplusplus.com/reference/algorithm/ ***
+ - Iterators:  https://www.cplusplus.com/reference/iterator/, ex: vector::begin()
