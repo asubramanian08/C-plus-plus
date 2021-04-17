@@ -64,7 +64,9 @@
         "typeinfo": "cpp",
         "unordered_map": "cpp",
         "vector": "cpp",
-        "memory_resource": "cpp"
+        "memory_resource": "cpp",
+        "deque": "cpp",
+        "list": "cpp"
     },
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true,
