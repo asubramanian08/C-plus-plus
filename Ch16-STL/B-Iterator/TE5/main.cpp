@@ -8,9 +8,12 @@ int main(void)
     //make the vector
     vector<int> vi;
     vi.resize(10);
-    generate(vi.begin(), vi.end(), [] { static int val = 0; val++;  return val; });
+    {
+        int val = 0;
+        generate(vi.begin(), vi.end(), [&val] { val++;  return val; });
+    }
 
-    //find the sum of 10
+    //find the sum of 10 -> accumilate
     int sum10 = 0;
     for (auto iter = vi.begin(); iter != vi.end(); iter++)
         sum10 += *iter;
