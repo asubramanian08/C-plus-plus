@@ -32,7 +32,7 @@ int main(void)
 {
     //his test
     fibfunctor fib; // the internal vector contains fib 0 and fib 1
-    const int N = 36;
+    const int N = 40;
     for (int i = 0; i < N; i++)
         cout << oldFib(i) << endl;
     for (int i = 0; i < N; i++)

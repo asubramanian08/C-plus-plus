@@ -14,7 +14,8 @@ void printFriends(const vector<string> &vs)
 {
     for (string str : vs)
         cout << str << ' ';
-    cout << endl;
+    cout << endl
+         << endl;
 }
 
 int main(void)
@@ -24,21 +25,19 @@ int main(void)
     string temp;
 
     //get mat friends
-    cout << "Enter Mat's friends (enter black line to stop)" << endl;
+    cout << "Enter Mat's friends (enter blank line to stop)" << endl;
     readFriends(mat);
     sort(mat.begin(), mat.end());
     //print mat friends
-    cout << "Mat's friends: " << endl
-         << endl;
+    cout << "Mat's friends: " << endl;
     printFriends(mat);
 
     //get pat friends
-    cout << "Enter Pat's friends (enter black line to stop)" << endl;
+    cout << "Enter Pat's friends (enter blank line to stop)" << endl;
     readFriends(pat);
     sort(pat.begin(), pat.end());
     //print pat friends
-    cout << "Pat's friends: " << endl
-         << endl;
+    cout << "Pat's friends: " << endl;
     printFriends(pat);
 
     //find and print all friends
