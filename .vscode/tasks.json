@@ -25,6 +25,28 @@
             "detail": "compiler: /usr/bin/g++"
         },
         {
+            "type": "cppbuild",
+            "label": "C/C++: g++ run active file",
+            "command": "/usr/bin/g++",
+            "args": [
+                "-std=c++17",
+                "${fileDirname}/*.cpp",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "compiler: /usr/bin/g++"
+        },
+        {
             "label": "Open Terminal",
             "type": "shell",
             "command": "osascript -e 'tell application \"Terminal\"\ndo script \"echo hello\"\nend tell'",

@@ -66,7 +66,8 @@
         "vector": "cpp",
         "memory_resource": "cpp",
         "deque": "cpp",
-        "list": "cpp"
+        "list": "cpp",
+        "numeric": "cpp"
     },
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true,
