@@ -4,7 +4,7 @@
 #include <iostream>
 using namespace std;
 #define SIZE 2'000'000'000
-//times things
+//times things -> run in release (remove the "-g")
 #include <chrono>
 
 int main(void)

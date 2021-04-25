@@ -7,29 +7,7 @@
             "command": "/usr/bin/g++",
             "args": [
                 "-std=c++17",
-                "-g",
-                "${fileDirname}/*.cpp",
-                "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-            "problemMatcher": [
-                "$gcc"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "detail": "compiler: /usr/bin/g++"
-        },
-        {
-            "type": "cppbuild",
-            "label": "C/C++: g++ run active file",
-            "command": "/usr/bin/g++",
-            "args": [
-                "-std=c++17",
+                "-g", //remove to relese mode
                 "${fileDirname}/*.cpp",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
