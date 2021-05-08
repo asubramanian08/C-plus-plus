@@ -67,7 +67,17 @@
         "memory_resource": "cpp",
         "deque": "cpp",
         "list": "cpp",
-        "numeric": "cpp"
+        "numeric": "cpp",
+        "map": "cpp",
+        "random": "cpp",
+        "__functional_03": "cpp",
+        "*.keepme": "cpp",
+        "coroutine": "cpp",
+        "propagate_const": "cpp",
+        "__hash": "cpp",
+        "thread": "cpp",
+        "typeindex": "cpp",
+        "variant": "cpp"
     },
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true,
