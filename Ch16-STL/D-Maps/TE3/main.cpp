@@ -30,11 +30,12 @@ public:
 int main(void)
 {
     //testing was not part of the question
-    //just makeing an empty map
+    //just making an empty map
     map<employee, double> salary = {
         salPair("Bob", "Johnson", 25.69),
         salPair("Rob", "William", 27.99),
-        salPair("Lob", "Brown", 99.999)};
+        salPair("Lob", "Brown", 9.999),
+        salPair("José", "Brown", 10000.99)};
     for (auto emp : salary)
         cout << "Name: " << emp.first << "; Salary: " << emp.second << endl;
     return 0;

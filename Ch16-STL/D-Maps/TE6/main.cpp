@@ -1,18 +1,7 @@
 #include <unordered_map>
 #include <iostream>
+#include "../BucketStats.cpp"
 using namespace std;
-
-//from TE5
-template <typename T>
-void bucket_stats(T &umap)
-{
-    cout << "Bucket Stats:" << endl
-         << "Size: " << umap.size() << endl
-         << "Number of buckets: " << umap.bucket_count() << endl
-         << "Load Factor: " << umap.load_factor() << endl
-         << "Max load factor: " << umap.max_load_factor() << endl
-         << endl;
-}
 
 int main(void)
 {

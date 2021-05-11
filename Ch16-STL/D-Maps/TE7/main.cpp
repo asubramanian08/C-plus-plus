@@ -1,6 +1,7 @@
 #include <string>
 #include <unordered_map>
 #include <iostream>
+#include "../BucketStats.cpp"
 using namespace std;
 
 class vaccine
@@ -20,44 +21,24 @@ public:
                id_version == va.id_version &&
                batch_number == va.batch_number;
     }
-    friend class vaccine_hash;
+    friend struct hash<vaccine>;
 };
 
-//shell given -> why can't I overload hast<vaccine>
-struct vaccine_hash
+//shell given -> instead of vaccine_hash
+template <>
+struct hash<vaccine>
 {
     size_t operator()(const vaccine &v) const
     {
-        return ((hash<string>()(v.manufacturer) >> 1) ^
-                hash<string>()(v.id_version) << 1) ^
-               v.batch_number << 2;
-    }
+        return (hash<int>()(v.batch_number) >> 1) ^
+               (hash<string>()(v.id_version) << 1) ^
+               hash<string>()(v.manufacturer);
+    } // can use boost lib :: hash combine
 };
-
-//from TE5 -> edited
-template <typename T>
-void bucket_stats(T &umap)
-{
-    cout << "Bucket Stats:" << endl
-         << "Size: " << umap.size() << endl
-         << "Number of buckets: " << umap.bucket_count() << endl
-         << "Load Factor: " << umap.load_factor() << endl
-         << "Max load factor: " << umap.max_load_factor() << endl
-         << "All bucket's contents:" << endl;
-    for (int i = 0; i < umap.bucket_count(); i++)
-    {
-        cout << "Bucket " << i << ':';
-        for (auto buck_it = umap.begin(i); buck_it != umap.end(i); buck_it++)
-            cout << ' ' << buck_it->second;
-        cout << endl;
-    }
-    cout << endl;
-}
 
 int main(void)
 {
-    //some error is happening of run time
-    unordered_map<vaccine, int, vaccine_hash> vac_map;
+    unordered_map<vaccine, int> vac_map; //would need to add vaccine_hash as template arg
     //insert statement given
     vac_map.insert({{{"Pfizer", "23ki21", 1}, 890},
                     {{"Pfizer", "23ki21", 2}, 721},
@@ -73,6 +54,6 @@ int main(void)
                     {{"Moderna", "oq330", 30}, 700}});
 
     bucket_stats(vac_map);
-    //There are (not) collision ?
+    //There are some collisions
     return 0;
 }

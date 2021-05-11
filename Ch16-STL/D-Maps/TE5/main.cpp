@@ -1,49 +1,38 @@
 #include <iostream>
 #include <unordered_map>
 #include <random>
+#include "../BucketStats.cpp"
 using namespace std;
 
-//function prototype given
-//Why is this a template function
-template <typename T>
-void bucket_stats(T &umap)
-{
-    cout << "Bucket Stats:" << endl
-         << "Size: " << umap.size() << endl
-         << "Number of buckets: " << umap.bucket_count() << endl
-         << "Load Factor: " << umap.load_factor() << endl
-         << "Max load factor: " << umap.max_load_factor() << endl
-         << endl;
-}
+#define bucketLoop 30
 
 int main(void)
 {
-    //It only loops once
-    unordered_map<int, int> umap;
+    unordered_map<int, int> umap;    // 1 or default max load factor
+    unordered_map<int, int> umapMLF; // 0.5 max load factor
     uniform_int_distribution<int> rand;
     int bCount;
 
     //first run
-    bCount = umap.bucket_count();
-    for (int i = 0; i <= bCount; i++)
+    cout << "Buckets with default max load factor:" << endl;
+    for (int i = 0; i <= bucketLoop; i++)
     {
         umap.insert(make_pair(i, i));
         bucket_stats(umap);
     }
 
-    //second fun (change max load factor)
-    umap.clear();
-    umap.max_load_factor(0.5);
-    bCount = umap.bucket_count();
-    for (int i = 0; i - 1 <= bCount; i++)
+    //second run (change max load factor)
+    cout << "Buckets with 0.5 max load factor:" << endl;
+    umapMLF.max_load_factor(0.5);
+    bCount = umapMLF.bucket_count();
+    for (int i = 0; i <= bucketLoop; i++)
     {
-        umap.insert(make_pair(i, i));
-        bucket_stats(umap);
+        umapMLF.insert(make_pair(i, i));
+        bucket_stats(umapMLF);
     }
 
     /** Answers (to the question f-h):
      * The load factor is displaying: the size/number of buckets
-     * When we go over the number of buckets: ? (runs once)
-     * The number of buckets increase when: the load factor 
-     reaches the max load factor (runs once) */
+     * When we go over the number of buckets: the number of buckets resizes (2x + 1)
+     * The number of buckets increase when: the load factor reaches the max load factor */
 }
