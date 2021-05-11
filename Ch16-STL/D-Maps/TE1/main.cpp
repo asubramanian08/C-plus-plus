@@ -1,3 +1,6 @@
+#include <map>
+#include <string>
+#include <iostream>
 using namespace std;
 
 int main(void)
@@ -29,12 +32,13 @@ int main(void)
     pop.erase("Mars");
     pop.insert(make_pair("Russia", 145'934'462));
     pop.insert({
-        make_pair("Ghana", 31'072'940),
-        make_pair("Myanmar", 54'409'800),
-        make_pair("Spain", 46'754'778),
+        {"Ghana", 31'072'940},
+        {"Myanmar", 54'409'800},
+        {"Spain", 46'754'778},
     });
     pop.emplace("France", 65'273'511);
-    auto strCmp = [](const string &str1, const string &str2) { return str1 > str2; };
+    auto strCmp = [](const string &str1, const string &str2)
+    { return str1 > str2; };
     map<string, unsigned int, decltype(strCmp)> rPop(strCmp);
     rPop.insert(pop.begin(), pop.end());
     cout << "rPop's values:";
