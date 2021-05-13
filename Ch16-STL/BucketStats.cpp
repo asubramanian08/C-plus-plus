@@ -16,7 +16,7 @@ void bucket_stats(T &umap)
     {
         cout << "Bucket " << i << ':';
         for (auto buck_it = umap.begin(i); buck_it != umap.end(i); buck_it++)
-            cout << ' ' << buck_it->second;
+            cout << ' ' << *buck_it; //should be ->second
         cout << endl;
     }
     cout << endl;
