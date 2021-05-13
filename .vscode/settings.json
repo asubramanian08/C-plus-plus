@@ -77,7 +77,8 @@
         "__hash": "cpp",
         "thread": "cpp",
         "typeindex": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "unordered_set": "cpp"
     },
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true,
