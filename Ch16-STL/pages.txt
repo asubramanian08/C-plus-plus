@@ -1,4 +1,4 @@
-All links to c++ reference (excluding part a)
+All links to c++ reference (unless otherwise specified in the folder)
 Read from https://www.cplusplus.com/reference/stl/
 
 Break down:
