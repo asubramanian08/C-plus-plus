@@ -13,8 +13,9 @@ int main(void)
     unique_ptr<int> p1;
     if (!p1)
         p1 = make_unique<int>(42);
-    cout << p1;
-    unique_ptr<int> p2(new int(99));
+    cout << *p1 << endl;
+    auto p2 = make_unique<int>(99);
+    //unique_ptr<int> p59(99); SHOULD BE!!
     p1.swap(p2);
     unique_ptr<int[]> p3(new int[20]);
     for (int i = 0; i < 20; i++)
