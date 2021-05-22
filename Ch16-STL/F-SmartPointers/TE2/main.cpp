@@ -1,18 +1,7 @@
 #include <iostream>
 using namespace std;
 
-//following structures were given
-struct A
-{
-    int x;
-    virtual void callme() { cout << "A\n"; }
-    virtual ~A() { cout << "A deleted\n"; }
-};
-struct B : public A
-{
-    virtual void callme() { cout << "B\n"; }
-    ~B() { cout << "B deleted\n"; }
-};
+#include "../AB.cpp"
 
 int main(void)
 {
