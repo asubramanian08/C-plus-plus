@@ -15,6 +15,8 @@ int main(void)
                  {"Darshan", 5},
                  {"Ken", 5}});
 
-    set<string> test_set(test.begin(), test.end());
+    set<string> test_set;
+    transform(test.begin(), test.end(), inserter(test_set, test_set.begin()), [](const pair<string, int> p)
+              { return p.first; });
     return 0;
 }
