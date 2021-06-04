@@ -15,6 +15,6 @@ struct hash<point>
 {
     size_t operator()(const point &pt) const
     {
-        return (hash<double>()(pt.x) << 4) ^ (hash<double>()(pt.y) >> 3) ^ 751764953839;
+        return (hash<double>()(pt.x) << 4) ^ (hash<double>()(pt.y) >> 4) ^ 751764953839;
     }
 };

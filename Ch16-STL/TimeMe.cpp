@@ -1,10 +1,11 @@
 #include <chrono>
 //made in Lambda TE6
-template <typename Func>
+//changed in sets TE5
+template <typename Time = chrono::milliseconds, typename Func>
 auto TimeMe(Func toTime)
 {
     auto start = chrono::high_resolution_clock::now();
     toTime();
     auto stop = chrono::high_resolution_clock::now();
-    return chrono::duration_cast<chrono::milliseconds>(stop - start).count();
+    return chrono::duration_cast<Time>(stop - start).count();
 }
