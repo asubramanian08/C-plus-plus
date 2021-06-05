@@ -1,4 +1,4 @@
-All links to c++ reference (unless otherwise specified in the folder)
+All links to c++ reference -> mostly useful starting at Ch16-STL
 Read from https://www.cplusplus.com/reference/stl/
 
 Break down:
