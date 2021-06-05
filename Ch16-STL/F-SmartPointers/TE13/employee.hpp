@@ -13,7 +13,7 @@ public:
     employee(string name, int id);
     employee(const employee &other);
     employee &operator=(employee emp);
-    ~employee() = default;
+    ~employee();
     int getid();
     void setid(int);
     //added methods
