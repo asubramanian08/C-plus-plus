@@ -11,7 +11,7 @@ int main(void)
     auto unlamb = make_unique<lambtype>([](int x, int y)
                                         { return x - y; });
 
-    //call the lambda
+    //call the lambda -> could use invoke
     int shval = (*shlamb)(1, 2);
     int unval = (*unlamb)(1, 2);
     return 0;

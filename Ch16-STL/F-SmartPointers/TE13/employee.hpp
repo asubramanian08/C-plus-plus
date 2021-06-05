@@ -7,7 +7,7 @@ using namespace std;
 class employee
 {
 private:
-    struct impl;            //this class is solely in the cpp file -makes compiling faster
+    struct impl;            //makes compiling faster
     unique_ptr<impl> pimpl; //pointer to implementation
 public:
     employee(string name, int id);

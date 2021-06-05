@@ -1,6 +1,6 @@
 #include <memory>
 using namespace std;
-#include "../AB.cpp"
+#include "../AB.hpp"
 
 //contains '*' for added of modified parts
 class my_list

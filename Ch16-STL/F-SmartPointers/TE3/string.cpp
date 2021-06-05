@@ -1,9 +1,5 @@
 #include <cstring>
 #include "string.hpp" // includes <iostream>
-using std::cin;
-using std::cout;
-using std::make_unique;
-
 // initializing static class member
 
 int String::num_strings = 0;
@@ -14,26 +10,26 @@ int String::HowMany() { return num_strings; }
 // class methods
 String::String(const char *s) // construct String from C string
 {
-    len = std::strlen(s);               // set size
-    str = make_unique<char[]>(len + 1); // allot storage
-    std::strcpy(str.get(), s);          // initialize pointer
-    num_strings++;                      // set object count
+    len = std::strlen(s);                    // set size
+    str = std::make_unique<char[]>(len + 1); // allot storage
+    std::strcpy(str.get(), s);               // initialize pointer
+    num_strings++;                           // set object count
 }
 
 String::String() // default constructor
 {
     len = 4;
-    str = make_unique<char[]>(1);
+    str = std::make_unique<char[]>(1);
     str[0] = '\0'; // default string
     num_strings++;
 }
 
 String::String(const String &st)
 {
-    num_strings++;                        // handle static member update
-    len = st.len;                         // same length
-    str = make_unique<char[]>(len + 1);   // allot space
-    std::strcpy(str.get(), st.str.get()); // copy string to new location
+    num_strings++;                           // handle static member update
+    len = st.len;                            // same length
+    str = std::make_unique<char[]>(len + 1); // allot space
+    std::strcpy(str.get(), st.str.get());    // copy string to new location
 }
 
 String::~String() // necessary destructor
@@ -49,7 +45,7 @@ String &String::operator=(const String &st)
     if (this == &st)
         return *this;
     len = st.len;
-    str = make_unique<char[]>(len + 1);
+    str = std::make_unique<char[]>(len + 1);
     std::strcpy(str.get(), st.str.get());
     return *this;
 }
@@ -58,7 +54,7 @@ String &String::operator=(const String &st)
 String &String::operator=(const char *s)
 {
     len = std::strlen(s);
-    str = make_unique<char[]>(len + 1);
+    str = std::make_unique<char[]>(len + 1);
     std::strcpy(str.get(), s);
     return *this;
 }

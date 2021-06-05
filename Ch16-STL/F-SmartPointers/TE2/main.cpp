@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-#include "../AB.cpp"
+#include "../AB.hpp"
 
 int main(void)
 {
@@ -16,7 +16,7 @@ int main(void)
     p = make_unique<B>();
     p = make_unique<B>();
     //the old memory from p gets freed
-    unique_ptr<B[]> parr(new B[10]);
+    unique_ptr<B[]> parr = make_unique<B[]>(10);
     for (int i = 0; i < 10; i++)
         parr[i].x = 42;
     //I can free it using the reset method in unique_ptr
