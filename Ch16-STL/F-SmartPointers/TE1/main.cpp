@@ -5,7 +5,7 @@ using namespace std;
 //unique ptr maker of int 42
 unique_ptr<int> upMaker()
 {
-    return unique_ptr<int>(new int(42));
+    return make_unique<int>(42);
 }
 
 int main(void)
@@ -17,7 +17,7 @@ int main(void)
     auto p2 = make_unique<int>(99);
     //unique_ptr<int> p59(99); SHOULD BE!!
     p1.swap(p2);
-    unique_ptr<int[]> p3(new int[20]);
+    unique_ptr<int[]> p3 = make_unique<int[]>(20);
     for (int i = 0; i < 20; i++)
         p3[i] = i;
     unique_ptr<int> test = upMaker();

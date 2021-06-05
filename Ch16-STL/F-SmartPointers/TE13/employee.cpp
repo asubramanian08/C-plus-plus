@@ -14,7 +14,7 @@ struct employee::impl
 };
 // Constructor connected with our impl structure
 employee::employee(string name, int id) : pimpl(make_unique<impl>(name, id)) {}
-employee::employee(const employee &other) : pimpl(new impl(*other.pimpl)) {}
+employee::employee(const employee &other) : pimpl(make_unique<impl>(*other.pimpl)) {}
 employee &employee::operator=(employee emp)
 {
     swap(pimpl, emp.pimpl);

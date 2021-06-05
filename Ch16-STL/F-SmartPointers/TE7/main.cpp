@@ -1,12 +1,12 @@
 #include <memory>
 #include <iostream>
 using namespace std;
-#include "../AB.cpp"
+#include "../AB.hpp"
 
 int main(void)
 {
     shared_ptr<int> test = make_shared<int>(0);
-    shared_ptr<A> pa;
+    shared_ptr<A> pa = make_shared<A>();
     pa->x = 42;
     pa->callme();
     shared_ptr<A> pa2(pa);
