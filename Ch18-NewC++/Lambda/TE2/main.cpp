@@ -1,12 +1,10 @@
-using namespace std;
-
 int main(void)
 {
     int x = 3;
-    auto add = [x](int y) { /*x = x + 1;*/ return x + y; };
+    auto addX = [x](int y) { /*x = x + 1;*/ return x + y; };
     // the () operator is const
     // "mutable" removes the const specifier
-    auto add = [x](int y)
+    auto addY = [x](int y)
     {
         y--;
         return x + y;

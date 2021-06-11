@@ -4,7 +4,7 @@ using namespace std;
 
 int main(void)
 {
-    //what is the point of invoke?
+    //invoke exists for other reasons
     int a = invoke([]()
                    { return 42; });
     int b = invoke([](int x, int y)
