@@ -29,10 +29,10 @@ int main(void)
     //copied and some commented
     auto e = [/*glob*/]()
     { return glob + 1; };
-    /**you can't capute globals because ?static
+    /**you can't capute globals because they are created on the heap
      * its works with out the capture */
 
-    // ?
+    // cout doesn't need to be captured because its not local (global)
 
     static int stat = 4;
     //copied and some commented
@@ -41,8 +41,8 @@ int main(void)
     /**This has the same problem as a global
      * When it is remove everything works*/
 
-    //copied and some commented
-    int x = 3;
+    //copied and some commented (got rid of int in int x)
+    x = 3;
     auto add = [x](int y) { /*x = x + 1;*/ return x + y; };
     //it doesn't compile
 
