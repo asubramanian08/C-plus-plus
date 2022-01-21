@@ -36,8 +36,8 @@ int main()
     cout << endl;
     for_each(etcetera.begin(), etcetera.end(), /*outint*/ prInt);
     cout << endl;
-    yadayada.remove_if(/*f100*/ [cutoff = 100](auto v) // HELP: should I make a cutoff
-                       { return v > cutoff; });        // use a named function object
+    yadayada.remove_if(/*f100*/ [cutoff = 100](auto v)
+                       { return v > cutoff; }); // use a named function object
     etcetera.remove_if(/*TooBig<int>(200)*/ [cutoff = 200](auto v)
                        { return v > cutoff; }); // construct a function object
     cout << "Trimmed lists:\n";

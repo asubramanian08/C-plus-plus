@@ -3,9 +3,12 @@
 using namespace std;
 
 template <typename T>
-T average_list(T{...}) // HELP
+T average_list(initializer_list<T> list)
 {
-    return 0;
+    T sum = 0;
+    for (const T &item : list)
+        sum += item;
+    return sum / list.size();
 }
 
 int main()

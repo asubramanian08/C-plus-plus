@@ -1,13 +1,9 @@
 #include <iostream>
 
+template <typename T>
+long double sum_values(T arg) { return arg; }
 template <typename T, typename... Args>
-long double sum_values(T arg1, Args... args)
-{
-    long double sum = arg1;
-    sum += sum_values(args);
-    return sum;
-}
-long double sum_values(void) { return 0.0; }
+long double sum_values(T arg1, Args... args) { return (long double)arg1 + sum_values(args...); }
 
 int main(void)
 {

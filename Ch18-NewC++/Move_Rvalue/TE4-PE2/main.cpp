@@ -49,7 +49,7 @@ Cpmv &Cpmv::operator=(Cpmv &&mv)
 }
 Cpmv Cpmv::operator+(const Cpmv &obj) const { return Cpmv(pi->qcode + obj.pi->qcode, pi->zcode + obj.pi->zcode); }
 void Cpmv::Display(void) const { std::cout << "Qcode: " << pi->qcode << ", "
-                                           << "Zcode" << pi->zcode << std::endl; }
+                                           << "Zcode: " << pi->zcode << std::endl; }
 
 int main(void)
 {
