@@ -3,24 +3,22 @@
 #include <algorithm>
 #include <vector>
 #include <stdexcept>
-#include "csv_helpers.hpp"
 #include "csv_classes.hpp"
+#include "csv_helpers.hpp"
 using namespace std;
 
-// regex pattern matching - helpers.cpp
-// add the date to it -> different file
-// inherit from the string class and add cast functionality
+// HELP error when I try to find ',' in the data line it fails (getFeild)
+// Is there are way to not use the csv_line::Types and just use templates
 // HELP should csv_line::sortfield be with string or string_view
 
 int main(int argc, const char *argv[])
 {
     if (argc != argCt)
-        throw invalid_argument("./csv_main {input_file} {output_file} FIELD <Ascend|Decend|A|D>");
+        throw invalid_argument("exc {input_file} {output_file} FIELD <Ascend|Decend|A|D>");
     ifstream in(argv[inF]);
     int sortCol = atoi(argv[fld]);
     string_view csv_header = getCSVLine(in, false);
-    string_view sortfield = getField(getCSVLine(in, true), sortCol);
-    int sortType = isdigit(sortfield[0]) ? csv_line::Int : csv_line::Str;
+    int sortType = REGEX_sortType(getField(getCSVLine(in, true), sortCol));
     vector<csv_line> csv;
     while (!in.eof())
         csv.push_back(csv_line(getCSVLine(in, false), sortCol, sortType));

@@ -1,4 +1,4 @@
-name,age
-Joe,42
-Fred,21
-Albert,33
+name,age,favNum
+Joe,10/6/2004,39
+Fred,8/08/1979,66
+Albert,03/05/2015,10
