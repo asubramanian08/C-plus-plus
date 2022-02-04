@@ -21,8 +21,9 @@ private:
     std::variant<int, std::string, date> sortfield;
 
 public:
-    csv_line(std::string_view ln, int col, int sortType);
     enum Types { Int, Str, Dat };
+    csv_line(std::string_view ln, int col, int sortType);
+    static std::string_view getField(std::string_view ln, int col);
     bool operator<(const csv_line &cl) const;
     bool operator>(const csv_line &cl) const;
     friend std::ostream &operator<<(std::ostream &os, const csv_line &cl);
