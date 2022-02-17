@@ -1,4 +1,4 @@
-name,age,favNum
-Joe,10/6/2004,39
+Name,DOB,Age
 Albert,8/08/1979,66
+Joe,10/6/2004,39
 Fred,03/05/2015,10

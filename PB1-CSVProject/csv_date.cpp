@@ -11,7 +11,7 @@ date::date(const string &dat)
     size_t ds = 0, ms = dat.find('/', ds) + 1, ys = dat.find('/', ms) + 1;
     day = stoi(dat.substr(ds, ms - ds - 1));
     month = stoi(dat.substr(ms, ys - ms - 1));
-    year = stoi(dat.substr(ds, dat.size() - ds));
+    year = stoi(dat.substr(ys, dat.size() - ys));
 }
 
-int date::operator<=>(const date &d) const { return d.year != year ? d.year - year : (d.month == month ? d.day - day : d.month - month); }
+int date::operator<=>(const date &d) const { return year != d.year ? year - d.year : (month == d.month ? day - d.day : month - d.month); }

@@ -6,24 +6,23 @@
 #include "csv_helpers.hpp"
 using namespace std;
 
-string_view readCSVLine(istream &in, bool peek)
+string_view readCSVLine(string_view &csv_view, string_view &line, bool advance)
 {
-    streampos org = in.tellg();
-    string line_str;
-    getline(in, line_str);
-    string_view line_view = static_cast<string_view>(line_str);
-    if (peek)
-        in.seekg(org, std::ios_base::beg);
-    return line_view;
+    size_t endLine = csv_view.find("\n");
+    line = csv_view.substr(0, endLine);
+    endLine = min(endLine, csv_view.size() - 1);
+    if (advance)
+        csv_view.remove_prefix(endLine + 1);
+    return line;
 }
 
 int REGEX_sortType(string_view field)
 {
     int type = csv_line::Str;
-    regex int_expr("^[0-9]+$"), dat_expr("^[0-9]+/[0-9]+/[0-9]+$");
-    if (regex_match(field.data(), int_expr))
+    regex int_expr("^\\d+$"), dat_expr("^\\d+/\\d+/\\d+$");
+    if (regex_match(field.begin(), field.end(), int_expr))
         type = csv_line::Int;
-    else if (regex_match(field.data(), dat_expr))
+    else if (regex_match(field.begin(), field.end(), dat_expr))
         type = csv_line::Dat;
     return type;
 }
