@@ -1,1 +1,0 @@
-This file is to test if the git submodule for storming robots is working
