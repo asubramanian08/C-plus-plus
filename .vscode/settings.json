@@ -114,8 +114,5 @@
         "strstream": "cpp",
         "valarray": "cpp"
     },
-    "editor.formatOnPaste": true,
-    "editor.formatOnSave": true,
-    "editor.formatOnType": true,
-    "C_Cpp.enhancedColorization": "Enabled"
+    "C_Cpp.enhancedColorization": "Enabled",
 }

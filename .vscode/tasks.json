@@ -7,7 +7,7 @@
             "command": "/usr/bin/g++",
             "args": [
                 "-std=c++20",
-                "-g", //remove to relese mode
+                "-g", //remove for relese mode
                 "${fileDirname}/*.cpp",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
