@@ -24,7 +24,7 @@ SplayMap::Node *SplayMap::splay(Node *subtree, const int &key) const
     if (ret->next[!side] != nullptr)
         ret->next[!side]->par = subtree;
     ret->next[!side] = subtree;
-    subtree->par = ret->next[!side];
+    subtree->par = ret;
     return ret;
 }
 
@@ -55,20 +55,22 @@ size_t SplayMap::size(Node *subtree) const { return subtree == nullptr ? 0 : (1 
 
 #pragma region "ITERATORS"
 
-SplayMap::Iterator::reference SplayMap::Iterator::operator*() const
-{
-    return ptr->key_value;
-}
+SplayMap::Iterator::reference SplayMap::Iterator::operator*() const { return ptr->key_value; }
 SplayMap::Iterator::pointer SplayMap::Iterator::operator->() { return &ptr->key_value; }
 SplayMap::Iterator &SplayMap::Iterator::operator++()
 {
-    while (ptr != nullptr && ptr->next[1] == nullptr)
-        ptr = ptr->par;
     if (ptr == nullptr)
         return *this;
-    ptr = ptr->next[1];
-    while (ptr->next[0] != nullptr)
-        ptr = ptr->next[0];
+    if (ptr->next[1] != nullptr)
+    {
+        ptr = ptr->next[1];
+        while (ptr->next[0] != nullptr)
+            ptr = ptr->next[0];
+        return *this;
+    }
+    int orgKey = ptr->key_value.first;
+    while (ptr != nullptr && ptr->key_value.first <= orgKey)
+        ptr = ptr->par;
     return *this;
 }
 SplayMap::Iterator SplayMap::Iterator::operator++(int)
@@ -96,10 +98,7 @@ SplayMap::Iterator SplayMap::end() const { return Iterator(nullptr); }
 
 #pragma region "CAPACITY"
 
-bool SplayMap::empty(void) const
-{
-    return root == nullptr;
-}
+bool SplayMap::empty(void) const { return root == nullptr; }
 
 size_t SplayMap::size(void) const { return size(root); }
 
@@ -107,10 +106,7 @@ size_t SplayMap::size(void) const { return size(root); }
 
 #pragma region "ELEMENT ACCESS"
 
-int &SplayMap::operator[](const int &key)
-{
-    return insert(key, int())->second;
-}
+int &SplayMap::operator[](const int &key) { return insert(key, int())->second; }
 
 int &SplayMap::at(const int &key) { return contains(key) ? root->key_value.second : throw std::out_of_range("SplayMap::at(const int& key): No instance of key"); }
 
@@ -120,12 +116,28 @@ int &SplayMap::at(const int &key) { return contains(key) ? root->key_value.secon
 
 SplayMap::Iterator SplayMap::insert(const int &key, const int &value)
 {
-    if (contains(key))
-        return end();
     Node *temp = new Node(key, value);
-    if (root != nullptr)
-        temp->next[root->key_value.first > key] = root, root->par = temp;
-    root = temp;
+    if (empty())
+    {
+        root = temp;
+        return Iterator(root);
+    }
+    // Binary Tree insert
+    Node *search = root;
+    while (key != search->key_value.first &&
+           search->next[key > search->key_value.first] != nullptr)
+        search = search->next[key > search->key_value.first];
+    if (key == search->key_value.first)
+    { // already exists
+        delete temp;
+        temp = search;
+    }
+    else // create
+    {
+        search->next[key > search->key_value.first] = temp;
+        temp->par = search;
+    }
+    splay(key);
     return Iterator(root);
 }
 

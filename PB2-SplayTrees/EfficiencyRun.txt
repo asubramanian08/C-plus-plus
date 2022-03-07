@@ -1,0 +1,12 @@
+SPLAY MAP EFFICIENCY TESTING
+Enter the number of total values: 50000000
+Enter the number of high frequency values: 500
+Enter the number for times to search those high frequency values: 1000000
+Generating and shuffling the key and value pairs
+Creating the map, SplayMap, and Timer
+Inserting 50000000 values to a std map takes: 164503 milliseconds
+Inserting 50000000 values to a SplayMap takes: 148082 milliseconds
+Generating search order
+Searching 500 numbers 1000000 times with a std map takes: 1261 milliseconds
+Searching 500 numbers 1000000 times with a SplayMap takes: 229 milliseconds
+Deleting arrays

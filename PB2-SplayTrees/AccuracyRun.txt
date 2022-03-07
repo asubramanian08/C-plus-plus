@@ -1,0 +1,46 @@
+SPLAY MAP ACCURACY TESTING
+SplayMap()
+empty(): true
+size(): 0
+operator[](3) = 42
+size(): 1
+at(3): 42
+contains(3): true
+erase(3): 1
+contains(3): false
+at(3): exception thrown
+empty(): true
+insert(13,1)
+insert(8,99)
+insert(2,70)
+insert(34,230)
+insert(26,223)
+insert(21,40)
+insert(78,511)
+insert(92,398)
+insert(36,165)
+insert(87,443)
+size(): 10
+Ranged for loop though SplayMap: 
+(2,70)
+(8,99)
+(13,1)
+(21,40)
+(26,223)
+(34,230)
+(36,165)
+(78,511)
+(87,443)
+(92,398)
+*find(26): (26,223)
+*lower_bound(26): (26,223)
+*upper_bound(26): (34,230)
+erase(26): 1
+*find(26): returned end()
+size(): 9
+insert(8,-5)
+*lower_bound(7): (8,99)
+*upper_bound(8): (13,1)
+contains(8): true
+clear()
+empty(): true

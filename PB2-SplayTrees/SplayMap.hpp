@@ -1,11 +1,5 @@
 #include <iterator>
 
-/**test which a separate driver - compare with map
- * map a map with 50 million values
- * use a vector of 500 values and find them over and over
- * Time this for both map and SplayMap */
-// Make SplayMap a template
-
 class SplayMap
 {
 private:
@@ -20,10 +14,7 @@ private:
 
 public:
 #pragma region "MEMBER FUNCTIONS"
-    SplayMap(void)
-    {
-        root = nullptr;
-    }
+    SplayMap(void) { root = nullptr; }
     ~SplayMap(void) { deleteMap(root); }
     SplayMap(const SplayMap &) = delete;
     SplayMap &operator=(SplayMap &) = delete;
@@ -58,7 +49,8 @@ public:
 
 #pragma region "CAPACITY"
     bool empty(void) const;
-    size_t size(void) const; // O(N) complexity
+    // O(N) complexity
+    size_t size(void) const;
 #pragma endregion
 
 #pragma region "ELEMENT ACCESS"
@@ -67,7 +59,7 @@ public:
 #pragma endregion
 
 #pragma region "MODIFIERS"
-    Iterator insert(const int &key, const int &value); // lazy insert
+    Iterator insert(const int &key, const int &value);
     size_t erase(const int &key);
     void clear(void);
 #pragma endregion
