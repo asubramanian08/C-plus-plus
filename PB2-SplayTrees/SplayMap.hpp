@@ -4,24 +4,29 @@ class SplayMap
 {
 private:
 #pragma region "HELPERS"
-    struct Node;
-    Node *root;
-    Node *splay(Node *subtree, const int &key) const;
+    size_t elementCt;
+    struct Node
+    {
+        Node *next[2], *par;
+        std::pair<int, int> key_value;
+        Node(const int &k, const int &v);
+    } * root;
+    Node *BTSearch(const int &key) const;
+    Node *splay(Node *subtree, const int &key);
     Node *splay(const int &key);
-    void deleteMap(Node *subtree) const;
-    size_t size(Node *subtree) const;
+    void recursiveDelete(Node *subtree);
 #pragma endregion
 
 public:
 #pragma region "MEMBER FUNCTIONS"
-    SplayMap(void) { root = nullptr; }
-    ~SplayMap(void) { deleteMap(root); }
+    SplayMap(void) { root = nullptr; elementCt = 0; }
+    ~SplayMap(void) { clear(); }
     SplayMap(const SplayMap &) = delete;
     SplayMap &operator=(SplayMap &) = delete;
 #pragma endregion
 
 #pragma region "ITERATORS"
-    class Iterator final
+    class iterator final
     {
     public:
         using iterator_category = std::forward_iterator_tag;
@@ -32,42 +37,44 @@ public:
 
     public:
         reference operator*() const;
-        pointer operator->();
-        Iterator &operator++();   // Prefix
-        Iterator operator++(int); // Postfix
-        friend bool operator==(const Iterator &i1, const Iterator &i2);
-        friend bool operator!=(const Iterator &i1, const Iterator &i2);
+        pointer operator->() const;
+        iterator &operator++();   // Prefix
+        iterator operator++(int); // Postfix
+        friend bool operator==(const iterator &i1, const iterator &i2);
+        friend bool operator!=(const iterator &i1, const iterator &i2);
         friend class SplayMap;
 
     private:
         Node *ptr;
-        Iterator(Node *p) : ptr(p){};
+        iterator(Node *p) : ptr(p){};
     };
-    Iterator begin() const;
-    Iterator end() const;
+    iterator begin();
+    iterator end();
 #pragma endregion
 
 #pragma region "CAPACITY"
     bool empty(void) const;
-    // O(N) complexity
     size_t size(void) const;
 #pragma endregion
 
 #pragma region "ELEMENT ACCESS"
     int &operator[](const int &key);
+    const int &operator[](const int &key) const;
     int &at(const int &key);
+    const int &at(const int &key) const;
 #pragma endregion
 
 #pragma region "MODIFIERS"
-    Iterator insert(const int &key, const int &value);
+    iterator insert(const int &key, const int &value);
     size_t erase(const int &key);
     void clear(void);
 #pragma endregion
 
 #pragma region "OPERATIONS"
-    Iterator find(const int &key);
-    Iterator lower_bound(const int &key);
-    Iterator upper_bound(const int &key);
+    iterator find(const int &key);
+    iterator lower_bound(const int &key);
+    iterator upper_bound(const int &key);
     bool contains(const int &key);
+    bool contains(const int &key) const;
 #pragma endregion
 };

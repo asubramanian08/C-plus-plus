@@ -4,14 +4,19 @@ using namespace std;
 
 #pragma region "HELPERS"
 
-struct SplayMap::Node
-{
-    Node *next[2], *par;
-    pair<int, int> key_value;
-    Node(const int &k, const int &v) : key_value(k, v), par(nullptr) { next[0] = next[1] = nullptr; }
-};
+SplayMap::Node::Node(const int &k, const int &v) : key_value(k, v), par(nullptr) { next[0] = next[1] = nullptr; }
 
-SplayMap::Node *SplayMap::splay(Node *subtree, const int &key) const
+SplayMap::Node *SplayMap::BTSearch(const int &key) const
+{
+    Node *search = root;
+    if (search == nullptr) return search;
+    while (key != search->key_value.first &&
+           search->next[key > search->key_value.first] != nullptr)
+        search = search->next[key > search->key_value.first];
+    return search;
+}
+
+SplayMap::Node *SplayMap::splay(Node *subtree, const int &key)
 {
     // setup and check
     bool side;
@@ -24,8 +29,7 @@ SplayMap::Node *SplayMap::splay(Node *subtree, const int &key) const
     if (ret->next[!side] != nullptr)
         ret->next[!side]->par = subtree;
     ret->next[!side] = subtree;
-    subtree->par = ret;
-    return ret;
+    return subtree->par = ret;
 }
 
 SplayMap::Node *SplayMap::splay(const int &key)
@@ -36,16 +40,13 @@ SplayMap::Node *SplayMap::splay(const int &key)
     return root;
 }
 
-void SplayMap::deleteMap(Node *subtree) const
+void SplayMap::recursiveDelete(Node *subtree)
 {
-    if (subtree == nullptr)
-        return;
-    deleteMap(subtree->next[0]);
-    deleteMap(subtree->next[1]);
-    delete subtree;
+    if (subtree == nullptr) return;
+    recursiveDelete(subtree->next[0]);
+    recursiveDelete(subtree->next[1]);
+    delete subtree; elementCt--;
 }
-
-size_t SplayMap::size(Node *subtree) const { return subtree == nullptr ? 0 : (1 + size(subtree->next[0]) + size(subtree->next[1])); }
 
 #pragma endregion
 
@@ -55,12 +56,11 @@ size_t SplayMap::size(Node *subtree) const { return subtree == nullptr ? 0 : (1 
 
 #pragma region "ITERATORS"
 
-SplayMap::Iterator::reference SplayMap::Iterator::operator*() const { return ptr->key_value; }
-SplayMap::Iterator::pointer SplayMap::Iterator::operator->() { return &ptr->key_value; }
-SplayMap::Iterator &SplayMap::Iterator::operator++()
+SplayMap::iterator::reference SplayMap::iterator::operator*() const { return ptr->key_value; }
+SplayMap::iterator::pointer SplayMap::iterator::operator->() const { return &ptr->key_value; }
+SplayMap::iterator &SplayMap::iterator::operator++()
 {
-    if (ptr == nullptr)
-        return *this;
+    if (ptr == nullptr) return *this;
     if (ptr->next[1] != nullptr)
     {
         ptr = ptr->next[1];
@@ -73,26 +73,20 @@ SplayMap::Iterator &SplayMap::Iterator::operator++()
         ptr = ptr->par;
     return *this;
 }
-SplayMap::Iterator SplayMap::Iterator::operator++(int)
-{
-    Iterator temp = *this;
-    ++(*this);
-    return temp;
-}
-bool operator==(const SplayMap::Iterator &i1, const SplayMap::Iterator &i2) { return i1.ptr == i2.ptr; };
-bool operator!=(const SplayMap::Iterator &i1, const SplayMap::Iterator &i2) { return i1.ptr != i2.ptr; };
+SplayMap::iterator SplayMap::iterator::operator++(int) { iterator temp = *this; ++(*this); return temp; }
+bool operator==(const SplayMap::iterator &i1, const SplayMap::iterator &i2) { return i1.ptr == i2.ptr; }
+bool operator!=(const SplayMap::iterator &i1, const SplayMap::iterator &i2) { return i1.ptr != i2.ptr; }
 
-SplayMap::Iterator SplayMap::begin() const
+SplayMap::iterator SplayMap::begin()
 {
-    if (empty())
-        return end();
-    Node *curr = root;
-    while (curr->next[0] != nullptr)
-        curr = curr->next[0];
-    return Iterator(curr);
+    if (empty()) return end();
+    Node *search = root;
+    while (search->next[0] != nullptr)
+        search = search->next[0];
+    return iterator(search);
 }
 
-SplayMap::Iterator SplayMap::end() const { return Iterator(nullptr); }
+SplayMap::iterator SplayMap::end() { return iterator(nullptr); }
 
 #pragma endregion
 
@@ -100,7 +94,7 @@ SplayMap::Iterator SplayMap::end() const { return Iterator(nullptr); }
 
 bool SplayMap::empty(void) const { return root == nullptr; }
 
-size_t SplayMap::size(void) const { return size(root); }
+size_t SplayMap::size(void) const { return elementCt; }
 
 #pragma endregion
 
@@ -108,45 +102,31 @@ size_t SplayMap::size(void) const { return size(root); }
 
 int &SplayMap::operator[](const int &key) { return insert(key, int())->second; }
 
+const int &SplayMap::operator[](const int &key) const { return at(key); }
+
 int &SplayMap::at(const int &key) { return contains(key) ? root->key_value.second : throw std::out_of_range("SplayMap::at(const int& key): No instance of key"); }
+
+const int &SplayMap::at(const int &key) const { return contains(key) ? BTSearch(key)->key_value.second : throw std::out_of_range("SplayMap::at(const int& key): No instance of key"); }
 
 #pragma endregion
 
 #pragma region "MODIFIERS"
 
-SplayMap::Iterator SplayMap::insert(const int &key, const int &value)
+SplayMap::iterator SplayMap::insert(const int &key, const int &value)
 {
-    Node *temp = new Node(key, value);
-    if (empty())
-    {
-        root = temp;
-        return Iterator(root);
-    }
-    // Binary Tree insert
-    Node *search = root;
-    while (key != search->key_value.first &&
-           search->next[key > search->key_value.first] != nullptr)
-        search = search->next[key > search->key_value.first];
-    if (key == search->key_value.first)
-    { // already exists
-        delete temp;
-        temp = search;
-    }
-    else // create
-    {
-        search->next[key > search->key_value.first] = temp;
-        temp->par = search;
-    }
-    splay(key);
-    return Iterator(root);
+    Node *temp = new Node(key, value); elementCt++;
+    if (empty()) { root = temp; return iterator(root); }
+    Node *search = BTSearch(key);
+    if (key == search->key_value.first) { delete temp; elementCt--; temp = search; } // already exists
+    else { search->next[key > search->key_value.first] = temp; temp->par = search; } // create
+    return iterator(splay(key));
 }
 
 size_t SplayMap::erase(const int &key)
 {
-    if (!contains(key))
-        return 0;
+    if (!contains(key)) return 0;
     Node *subLeft = root->next[0], *subRight = root->next[1];
-    delete root;
+    delete root; elementCt--;
     if ((root = subLeft) != nullptr)
         root->par = nullptr;
     else // no left subtree
@@ -155,46 +135,41 @@ size_t SplayMap::erase(const int &key)
             root->par = nullptr;
         return 1;
     }
-    Node *curr = root;
-    while (curr->next[1] != nullptr)
-        curr = curr->next[1];
-    splay(curr->key_value.first)->next[1] = subRight;
+    Node *search = BTSearch(key); // largest
+    splay(search->key_value.first)->next[1] = subRight;
     if (subRight != nullptr)
         subRight->par = root;
     return 1;
 }
 
-void SplayMap::clear(void) { deleteMap(root), root = nullptr; }
+void SplayMap::clear(void) { recursiveDelete(root); root = nullptr; }
 
 #pragma endregion
 
 #pragma region "OPERATIONS"
 
-SplayMap::Iterator SplayMap::find(const int &key)
+SplayMap::iterator SplayMap::find(const int &key)
 {
-    Iterator ret(root = splay(key));
-    if (ret != end() && ret->first == key)
-        return ret;
-    else
-        return end();
+    iterator ret(root = splay(key));
+    return (ret != end() && ret->first == key) ? ret : end();
 }
 
-SplayMap::Iterator SplayMap::lower_bound(const int &key)
+SplayMap::iterator SplayMap::lower_bound(const int &key)
 {
-    Iterator ret(root = splay(key));
-    while (ret != end() && ret->first < key)
-        ret++;
+    iterator ret(root = splay(key));
+    while (ret != end() && ret->first < key) ret++;
     return ret;
 }
 
-SplayMap::Iterator SplayMap::upper_bound(const int &key)
+SplayMap::iterator SplayMap::upper_bound(const int &key)
 {
-    Iterator ret(root = splay(key));
-    while (ret != end() && ret->first <= key)
-        ret++;
+    iterator ret(root = splay(key));
+    while (ret != end() && ret->first <= key) ret++;
     return ret;
 }
 
 bool SplayMap::contains(const int &key) { return find(key) != end(); }
+
+bool SplayMap::contains(const int &key) const { return !empty() && BTSearch(key)->key_value.first == key; }
 
 #pragma endregion
