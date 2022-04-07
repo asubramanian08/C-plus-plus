@@ -51,7 +51,7 @@ void accuracy(void)
     }
     cout << "size(): " << accuracy.size() << endl;
     cout << "Ranged for loop though SplayMap: " << endl;
-    for (auto item : accuracy)
+    for (auto &item : accuracy)
         cout << item << endl;
     cout << "*find(26): " << *accuracy.find(26) << endl;
     cout << "*lower_bound(26): " << *accuracy.lower_bound(26) << endl;
