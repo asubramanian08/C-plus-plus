@@ -10,8 +10,8 @@ void RunThreads(Function f, unsigned numthreads = 0, bool join = true)
     vector<thread> threads;
     for (int i = 0; i < numthreads; i++)
         threads.emplace_back(f);
-    for (int i = 0; i < numthreads; i++)
-        join ? threads[i].join() : threads[i].detach();
+    for (auto &t : threads)
+        join ? t.join() : t.detach();
 }
 
 int main(void)

@@ -1,6 +1,7 @@
 /* Race conditions */
 #include <thread>
 #include <stack>
+#include <mutex>
 #include "../TE2/main.cpp"
 using namespace std;
 
@@ -17,13 +18,16 @@ void race_ya()
     }
 }
 
-void safe_race() // HELP - how to do this? Should I use mutex
+mutex stk_mtx;
+void safe_race()
 {
+    lock_guard<mutex> lg(stk_mtx);
     while (!s.empty())
     {
-        int const value = s.top(); // Why is this value const?
-        s.pop();
         this_thread::yield();
+        int const value = s.top();
+        this_thread::yield();
+        s.pop();
     }
 }
 
