@@ -1,0 +1,53 @@
+TEMPLATE SPLAY MAP ACCURACY TESTING
+TmpSplayMap<string, int>()
+empty(): true
+operator[]("hi"): 0
+size(): 1
+*begin(): (hi,0)
+insert("bye", 42)
+*upper_bound("b"): (bye,42)
+*lower_bound("b"): (bye,42)
+erase("b"): 0
+contains("hi"): true
+erase("hi"): 1
+contains("hi"): false
+size(): 1
+clear()
+empty(): true
+insert(jones,492)
+insert(walrus,549)
+insert(water,554)
+insert(hamburger,500)
+insert(waiter,565)
+insert(sailor,522)
+insert(abracadabra,488)
+size(): 7
+Ranged for loop though SplayMap:
+(abracadabra,488)
+(hamburger,500)
+(jones,492)
+(sailor,522)
+(waiter,565)
+(walrus,549)
+(water,554)
+*find("waiters"): end()
+*find("waiter"): (waiter,565)
+CONSTANT TEMPLATE SPLAY MAP METHOD TESTING
+operator[]("sailor"): 522
+operator[]("chair"): exception thrown
+size(): 7
+Ranged for loop though SplayMap:
+(abracadabra,488)
+(hamburger,500)
+(jones,492)
+(sailor,522)
+(waiter,565)
+(walrus,549)
+(water,554)
+*cbegin(): (abracadabra,488)
+contains("hi"): false
+contains("walrus"): true
+*find("hamburger"): (hamburger,500)
+*upper_bound("jones"): (sailor,522)
+*lower_bound("jones"): (jones,492)
+empty(): false

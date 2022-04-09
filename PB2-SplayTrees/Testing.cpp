@@ -2,12 +2,16 @@
 #include <map>
 #include <numeric>
 #include <random>
+#include <string>
 #include <vector>
 #include "SplayMap.hpp"
+#include "TemplateSplayMap.hpp"
 #include "../Timer.cpp"
 using namespace std;
 
-ostream &operator<<(ostream &os, const pair<int, int> &p) { return os << '(' << p.first << ',' << p.second << ')'; }
+template <typename T1, typename T2>
+ostream &operator<<(ostream &os, const pair<T1, T2> &p) { return os << '(' << p.first << ',' << p.second << ')'; }
+
 void accuracy(void)
 {
     cout << "SPLAY MAP ACCURACY TESTING" << endl;
@@ -50,7 +54,7 @@ void accuracy(void)
         accuracy.insert(insOrder[i], v);
     }
     cout << "size(): " << accuracy.size() << endl;
-    cout << "Ranged for loop though SplayMap: " << endl;
+    cout << "Ranged for loop though SplayMap:" << endl;
     for (auto &item : accuracy)
         cout << item << endl;
     cout << "*find(26): " << *accuracy.find(26) << endl;
@@ -72,6 +76,7 @@ void accuracy(void)
     cout << "clear()" << endl;
     accuracy.clear();
     cout << "empty(): " << (accuracy.empty() ? "true" : "false") << endl;
+    cout << endl;
 }
 
 void efficiency(void)
@@ -129,11 +134,82 @@ void efficiency(void)
     cout << "Deleting arrays" << endl;
     delete[] values;
     delete[] searchOrder;
+    cout << endl;
+}
+
+void constantTemplateMethods(const TmpSplayMap<string, int> &tsm)
+{
+    cout << "CONSTANT TEMPLATE SPLAY MAP METHOD TESTING" << endl;
+    cout << "operator[](\"sailor\"): " << tsm["sailor"] << endl;
+    cout << "operator[](\"chair\"): ";
+    try
+    {
+        cout << tsm["chair"] << endl;
+    }
+    catch (...)
+    {
+        cout << "exception thrown" << endl;
+    }
+    cout << "size(): " << tsm.size() << endl;
+    cout << "Ranged for loop though SplayMap:" << endl;
+    for (const auto &kv : tsm)
+        cout << kv << endl;
+    cout << "*cbegin(): " << *tsm.cbegin() << endl;
+    cout << "contains(\"hi\"): " << (tsm.contains("hi") ? "true" : "false") << endl;
+    cout << "contains(\"walrus\"): " << (tsm.contains("walrus") ? "true" : "false") << endl;
+    cout << "*find(\"hamburger\"): " << *tsm.find("hamburger") << endl;
+    cout << "*upper_bound(\"jones\"): " << *tsm.upper_bound("jones") << endl;
+    cout << "*lower_bound(\"jones\"): " << *tsm.lower_bound("jones") << endl;
+    cout << "empty(): " << (tsm.empty() ? "true" : "false") << endl;
+}
+
+void templateAccuracy(void)
+{
+    cout << "TEMPLATE SPLAY MAP ACCURACY TESTING" << endl;
+    cout << "TmpSplayMap<string, int>()" << endl;
+    TmpSplayMap<string, int> tsm;
+    cout << "empty(): " << (tsm.empty() ? "true" : "false") << endl;
+    cout << "operator[](\"hi\"): " << tsm["hi"] << endl;
+    cout << "size(): " << tsm.size() << endl;
+    cout << "*begin(): " << *tsm.begin() << endl;
+    cout << "insert(\"bye\", 42)" << endl;
+    tsm.insert("bye", 42);
+    cout << "*upper_bound(\"b\"): " << *tsm.upper_bound("b") << endl;
+    cout << "*lower_bound(\"b\"): " << *tsm.lower_bound("b") << endl;
+    cout << "erase(\"b\"): " << tsm.erase("b") << endl;
+    cout << "contains(\"hi\"): " << (tsm.contains("hi") ? "true" : "false") << endl;
+    cout << "erase(\"hi\"): " << tsm.erase("hi") << endl;
+    cout << "contains(\"hi\"): " << (tsm.contains("hi") ? "true" : "false") << endl;
+    cout << "size(): " << tsm.size() << endl;
+    cout << "clear()" << endl;
+    tsm.clear();
+    cout << "empty(): " << (tsm.empty() ? "true" : "false") << endl;
+    string insOrder[] = {"jones", "walrus", "water", "hamburger", "waiter", "sailor", "abracadabra"};
+    for (int i = 0; i < 7; i++)
+    {
+        int v = ((insOrder[i][0] + 17) << 2) ^ ((i * 43) >> 3);
+        cout << "insert" << make_pair(insOrder[i], v) << endl;
+        tsm.insert(insOrder[i], v);
+    }
+    cout << "size(): " << tsm.size() << endl;
+    cout << "Ranged for loop though SplayMap:" << endl;
+    for (auto &kv : tsm)
+        cout << kv << endl;
+    cout << "*find(\"waiters\"): ";
+    auto findWaiters = tsm.find("waiters");
+    if (findWaiters == tsm.end())
+        cout << "end()" << endl;
+    else // valid result
+        cout << *findWaiters << endl;
+    cout << "*find(\"waiter\"): " << *tsm.find("waiter") << endl;
+    constantTemplateMethods(tsm);
+    cout << endl;
 }
 
 int main(void)
 {
     accuracy();
     efficiency();
+    templateAccuracy();
     return 0;
 }
