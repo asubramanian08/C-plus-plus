@@ -106,7 +106,7 @@ const int &SplayMap::operator[](const int &key) const { return at(key); }
 
 int &SplayMap::at(const int &key) { return contains(key) ? root->key_value.second : throw std::out_of_range("SplayMap::at(const int& key): No instance of key"); }
 
-const int &SplayMap::at(const int &key) const { return contains(key) ? BTSearch(key)->key_value.second : throw std::out_of_range("SplayMap::at(const int& key): No instance of key"); }
+const int &SplayMap::at(const int &key) const { return contains(key) ? BTSearch(key)->key_value.second : throw std::out_of_range("SplayMap::at(const int& key) const: No instance of key"); }
 
 #pragma endregion
 
