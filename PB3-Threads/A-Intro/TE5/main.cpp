@@ -1,45 +1,42 @@
 #include <iostream>
 #include <future>
 #include <thread>
+#include <vector>
 #include "../../../Timer.cpp"
 using namespace std;
 
 // given function prototype
-int64_t linearSumMe(const long long *p, long size)
+uint32_t linearSumMe(const uint32_t *p, long size)
 {
-    int64_t sum = 0;
+    uint32_t sum = 0;
     for (long i = 0; i < size; i++)
         sum += p[i];
     return sum;
 }
 
-int64_t parallelSumMe(const long long *p, long size, int divisions)
+uint32_t parallelSumMe(const uint32_t *p, long size, int divisions)
 {
     long section = size / divisions, remainder = size - (divisions - 1) * section;
-    int64_t sum = 0;
+    vector<future<uint32_t>> partialSums;
     for (int i = 0; i < divisions; i++)
-        sum += async(linearSumMe, p + i * section, i == divisions - 1 ? remainder : section).get();
+        partialSums.push_back(async(linearSumMe, p + i * section, i == divisions - 1 ? remainder : section));
+    uint32_t sum = 0;
+    for (auto &f : partialSums)
+        sum += f.get();
     return sum;
 }
 
 int main(void)
 {
-    const long arrSize = 1'000'000'000;
-    long long *large_arr = new long long[arrSize];
+    const long arrSize = 2'000'000'000;
+    uint32_t *large_arr = new uint32_t[arrSize];
     for (int i = 0; i < arrSize; i++)
         large_arr[i] = 1;
-    long long linearTime = TimeMe([&arrSize, large_arr]()
-                                  { linearSumMe(large_arr, arrSize); });
-    long long halfTime = TimeMe([&arrSize, large_arr]()
-                                { parallelSumMe(large_arr, arrSize, 2); });
-    long long quarterTime = TimeMe([&arrSize, large_arr]()
-                                   { parallelSumMe(large_arr, arrSize, 4); });
-    cout << "linear time: " << linearTime << endl
-         << "half time: " << halfTime << endl
-         << "quarter time: " << quarterTime << endl;
-    // Fairly similar times: caching
-    /** Using long long's instead of ints
-     * linear time: 32171
-     * half time: 12936
-     * quarter time: 12991 */
+    cout << "Linear: " << TimeMe([&arrSize, large_arr]() { cout << "Sums to " << linearSumMe(large_arr, arrSize) << " taking "; }) << endl;
+    cout << "Half: " << TimeMe([&arrSize, large_arr]() { cout << "Sums to " << parallelSumMe(large_arr, arrSize, 2) << " taking "; }) << endl;
+    cout << "Quarter: " << TimeMe([&arrSize, large_arr]() { cout << "Sums to " << parallelSumMe(large_arr, arrSize, 4) << " taking "; }) << endl;
+    /** compile with "g++ -std=c++20 -O3 main.cpp"
+     * linear time: 11363
+     * half time: 8731
+     * quarter time: 4827 */
 }
