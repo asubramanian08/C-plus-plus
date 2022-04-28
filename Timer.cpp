@@ -1,4 +1,6 @@
 #include <chrono>
+#include <iostream>
+#include <string>
 using namespace std;
 
 template <typename Time = chrono::milliseconds>
@@ -13,7 +15,6 @@ public:
     void restart() { start = chrono::high_resolution_clock::now(); }
 };
 
-// From Ch16-STL/TimeMe.cpp
 template <typename Time = chrono::milliseconds, typename Func>
 auto TimeMe(Func toTime)
 {
@@ -21,4 +22,14 @@ auto TimeMe(Func toTime)
     toTime();
     auto stop = chrono::high_resolution_clock::now();
     return chrono::duration_cast<Time>(stop - start).count();
+}
+
+template <typename Time = chrono::milliseconds, typename Func>
+void DisplayTime(Func toTime, string message)
+{
+    auto start = chrono::high_resolution_clock::now();
+    auto ret = toTime();
+    auto stop = chrono::high_resolution_clock::now();
+    cout << message << " takes " << chrono::duration_cast<Time>(stop - start).count()
+         << " milliseconds and returns " << ret << endl;
 }
