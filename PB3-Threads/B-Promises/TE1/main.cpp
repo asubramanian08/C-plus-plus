@@ -15,5 +15,5 @@ int main(void)
     DisplayTime([&arrSize, large_arr]() { return reduce(execution::par, large_arr, large_arr + arrSize); }, "Parallel");
     DisplayTime([&arrSize, large_arr]() { return reduce(execution::unseq, large_arr, large_arr + arrSize); }, "Unsequenced");
     DisplayTime([&arrSize, large_arr]() { return reduce(execution::par_unseq, large_arr, large_arr + arrSize); }, "Parallel Unsequenced");
-    // HELP doesn't compile
+    // Doesn't compile: mac compiler doesn't properly include execution
 }

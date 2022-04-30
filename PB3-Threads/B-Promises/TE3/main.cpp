@@ -7,15 +7,14 @@ using namespace std;
 
 ofstream ofile; // output file stream
 string filename = R"(./PB3-Threads/B-Promises/TE3/ThreadIDs.txt)";
-mutex fileMut;
+once_flag wfFlag;
+mutex wfMut;
 
-// HELP printing one or no threads
 void WriteToFile()
 {
-    lock_guard<mutex> fileGuard(fileMut);
-    ofile.open(filename);
+    call_once(wfFlag, []() { ofile.open(filename); });
+    lock_guard<mutex> wfGuard(wfMut);
     ofile << "Thread num: " << this_thread::get_id() << endl;
-    ofile.close();
 }
 
 int main(void)

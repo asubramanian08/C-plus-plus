@@ -22,7 +22,4 @@ int dummyFunc()
     return value;
 }
 
-int main(void)
-{
-    DisplayTime([]() { return packagedAsync(dummyFunc).get(); }, "Dummy function");
-}
+int main(void) { DisplayTime([]() { return packagedAsync(dummyFunc).get(); }, "Dummy function"); }
