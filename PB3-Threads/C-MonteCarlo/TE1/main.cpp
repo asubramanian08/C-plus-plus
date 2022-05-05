@@ -46,18 +46,10 @@ double CalcPI(int numthreads = 1, uint64_t total_number_points = 1024)
 // PART C: test the timing (thread count) and accuracy (points tested)
 int main(void)
 {
-    DisplayTime([]()
-                { return CalcPI(1, 16777216); },
-                "Pi approximation with one   thread ");
-    DisplayTime([]()
-                { return CalcPI(2, 16777216); },
-                "Pi approximation with two   threads");
-    DisplayTime([]()
-                { return CalcPI(4, 16777216); },
-                "Pi approximation with four  threads");
-    DisplayTime([]()
-                { return CalcPI(8, 16777216); },
-                "Pi approximation with eight threads");
+    DisplayTime([]() { return CalcPI(1, 16777216); }, "Pi approximation with one   thread ");
+    DisplayTime([]() { return CalcPI(2, 16777216); }, "Pi approximation with two   threads");
+    DisplayTime([]() { return CalcPI(4, 16777216); }, "Pi approximation with four  threads");
+    DisplayTime([]() { return CalcPI(8, 16777216); }, "Pi approximation with eight threads");
     /** How long each version takes
      * one   thread : 3388 ms
      * two   threads: 1803 ms
