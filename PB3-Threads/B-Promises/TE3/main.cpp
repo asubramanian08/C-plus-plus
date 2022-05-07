@@ -2,7 +2,7 @@
 #include <fstream>
 #include <string>
 #include <mutex>
-#include "../../A-Intro/TE2/main.cpp"
+#include "../../A-Introduction/TE2/main.cpp"
 using namespace std;
 
 ofstream ofile; // output file stream
