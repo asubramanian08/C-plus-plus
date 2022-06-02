@@ -10,11 +10,14 @@ class threadsafe_queue
 {
 private:
     mutable mutex mut;
+    condition_variable cv;
     queue<T> data_queue;
 
 public:
     threadsafe_queue();
     void push(T new_value);
+    bool wait_and_pop(T &value);
+    unique_ptr<T> wait_and_pop();
     bool try_pop(T &value);
     unique_ptr<T> try_pop();
     bool empty() const;
@@ -27,13 +30,21 @@ TSQ_TPL void threadsafe_queue<T>::push(T new_value)
 {
     lock_guard<mutex> g(mut);
     data_queue.push(new_value);
+    cv.notify_one();
+}
+TSQ_TPL bool threadsafe_queue<T>::wait_and_pop(T &value)
+{
+    lock_guard<mutex> g(mut);
+    cv.wait(g, [this]() { return !empty(); });
+    value = move(data_queue.front());
+    return value != nullptr;
 }
 TSQ_TPL bool threadsafe_queue<T>::try_pop(T &value)
 {
     lock_guard<mutex> g(mut);
     try
     {
-        value = data_queue.front();
+        value = move(data_queue.front());
         data_queue.pop();
     }
     catch (...) { value = nullptr; }
@@ -45,7 +56,7 @@ TSQ_TPL unique_ptr<T> threadsafe_queue<T>::try_pop()
     unique_ptr<T> up;
     try
     {
-        up = make_unique(data_queue.front());
+        up = make_unique(move(data_queue.front()));
         data_queue.pop();
     }
     catch (...) { }
@@ -60,11 +71,4 @@ TSQ_TPL auto threadsafe_queue<T>::size() const
 {
     lock_guard<mutex> g(mut);
     return data_queue.size();
-}
-
-int main(void)
-{
-    threadsafe_queue<int> tq;
-    
-    return 0;
 }
