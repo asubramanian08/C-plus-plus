@@ -1,0 +1,10 @@
+Remember:
+    Basic edits: resize(), rotate(), flip()
+    image slices (construct new Mat with bounding Rect)
+    findContours() - using gray scale image find the contours
+    bounding rectangle: rectangle that encapsulates the wanted thing
+    contourArea() - area of a contour
+    rectangle() - draw a rectangle
+    canny edge detection: masks out everything but the edges
+1. Isolating a red ball from baby yoda background
+2. Coin detection (canny) - minimum enclosing circle
