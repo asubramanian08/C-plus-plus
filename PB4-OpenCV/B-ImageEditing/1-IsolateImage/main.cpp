@@ -26,7 +26,8 @@ int main(void)
 
     // mask image
     cvtColor(original, HSVimg, COLOR_BGR2HSV);
-    Scalar LOW(0, 48, 114), HIGH(8, 255, 255); // CREATE SLIDERS
+    // HELP: create sliders for these values
+    Scalar LOW(0, 48, 114), HIGH(8, 255, 255);
     inRange(HSVimg, LOW, HIGH, mask);
     imshow(MASK, mask);
     original.copyTo(maskedImg, mask);
